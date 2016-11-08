@@ -27,7 +27,7 @@
 # policies, either expressed or implied, of Nimbix, Inc.
 
 TYPE := base
-APP := openmpi
+APP := ubuntu-openmpi
 VERSION := 2.0.1
 OWNER := jarvice
 
