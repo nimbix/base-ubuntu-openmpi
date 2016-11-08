@@ -18,16 +18,12 @@ RUN apt-get update && apt-get install -y \
     libibumad-dev \
     libibumad3 \
     flex && \
-    apt-cache clean && \
-    rm -rf /var/lib/apt/lists/* \
-    && \
-    wget https://www.open-mpi.org/software/ompi/v2.0/downloads/openmpi-${MPI_VERSION}.tar.bz2 && \
-    tar xvf openmpi-${MPI_VERSION}.tar.bz2 && \
-    cd /tmp/openmpi-${MPI_VERSION} && \
-    ./configure --with-cuda=/usr/local/cuda && \
-    make -j4 && \
-    make install && \
-    cd /tmp && \
-    rm -rf /tmp/openmpi-${MPI_VERSION}
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
+ADD ./install.sh /tmp/install.sh
+RUN /bin/bash /tmp/install.sh && \
+    rm -rf /tmp/install.sh
+
+# Application Metadata
 ADD ./scripts /usr/local/scripts
