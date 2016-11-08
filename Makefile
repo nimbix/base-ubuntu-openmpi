@@ -32,12 +32,11 @@ VERSION := 2.0.1
 OWNER := jarvice
 
 image: Dockerfile
-	docker build -t app-${APP} .
+	docker build -t ${TYPE}-${APP} .
 
 
 tag: image
-	docker tag app-${APP} ${OWNER}/app-${APP}:latest && docker tag ${TYPE}-${APP} ${OWNER}/${TYPE}-${APP}:${VERSION}
+	docker tag ${TYPE}-${APP} ${OWNER}/${TYPE}-${APP}:latest && docker tag ${TYPE}-${APP} ${OWNER}/${TYPE}-${APP}:${VERSION}
 
-
-all : tag
-	docker push ${OWNER}/app-${APP}:latest && docker push ${OWNER}/${TYPE}-${APP}:${VERSION}
+push : tag
+	docker push ${OWNER}/${TYPE}-${APP}:latest && docker push ${OWNER}/${TYPE}-${APP}:${VERSION}
